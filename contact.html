@@ -1,0 +1,106 @@
+<!-- ---
+layout: examples
+title: Album example
+extra_css: "album.css"
+--- -->
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/contact.css">
+</head>
+<body>
+  <header>
+    <div class="navbar navbar-dark bg-black shadow-sm">
+      <div class="container d-flex justify-content">
+  
+        <button class="navbar-toggler" type="button" data-toggle="dropdown" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+  
+        <div class="collapse bg-dark" id="navbarHeader">
+          <div class="collapse dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <li class="dropdown-item"><a href="programme.html" >Programmes </a></li>
+              <li class="dropdown-item"><a href="carte.html">Carte</a></li>
+              <li class="dropdown-item"><a href="billeterie.html" >Billeterie</a></li>
+              <li class="dropdown-item"><a href="photos.html" >Photos</a></li>
+              <li class="dropdown-item"><a href="informations.html" >Informations pratiques</a></li>
+              <li class="dropdown-item"><a href="contact.html" >Contact</a></li>
+              <li class="dropdown-item"><a href="partenariats.html" >Partenariat</a></li>
+              <li class="dropdown-item"><a href="compte.html" >
+                <span style="color : white"></span>
+                <i class="fab fa-cog fa-5px"> </i>
+                Profil</a> </li>
+        </div>
+        </div>
+      <a href="index.html" > <img id="logo" src="images/logoemma.png" alt="Logo Nation Sounds" /> </a>
+      <!-- <nav class="navbar navbar-dark bg-black"> -->
+  
+        <!-- </nav> -->
+    </div>
+  </div>
+  </header>
+
+  <div class="head">
+  <h1>Contact</h1>
+  </div>
+
+    <div id="contact-form">
+    <div class="soustitle">
+        <h4>Vous avez une question ? Ecrivez-nous !</h4>
+      </div>
+        <p id="failure">Oops...le message n'a pas été envoyé</p>
+        <p id="success">Votre message a bien été envoyé ! Merci !</p>
+
+           <form method="post" action="/">
+          <div>
+              <label for="name">
+                <span class="required">Nom:</span>
+                <input class="champs" type="text" id="name" name="name" value="" placeholder="Ton nom" required="required" tabindex="1" autofocus="autofocus" />
+              </label>
+          </div>
+          <div>
+              <label for="email">
+                <span class="required">Email:</span>
+                <input type="email" id="email" name="email" value="" placeholder="Ton Email" tabindex="2" required="required" />
+              </label>
+          </div>
+          <div>
+              <label for="subject">
+              <span class="required">Sujet</span>
+                <select id="subject" name="subject" tabindex="4">
+                    <option value="quote">Choisir</option>
+                   <option value="hello">Prix</option>
+                   <option value="quote">Réservation</option>
+                    <option value="quote">Localisation</option>
+                     <option value="quote">Programme</option>
+                      <option value="quote">Partenariat</option>
+                   <option value="general">- Autre - </option>
+                </select>
+              </label>
+          </div>
+          <div>
+              <label for="message">
+                <span class="required">Message: *</span>
+                <textarea id="message" name="message" placeholder="Ton message" tabindex="5" required="required"></textarea>
+              </label>
+          </div>
+              <button name="submit" type="submit" id="submit" >Envoyer</button>
+        
+           </form>
+
+      </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+
+<footer class="text-muted">
+    <div class="social">
+   
+          <a href="https://www.facebook.com" > <img class="social-img" id="logo" src="images/facebook.png" alt="Logo Nation Sounds" /> </a>
+          <a href="https://www.instagram.com/" > <img class="social-img" id="logo" src="images/instagram.png" alt="Logo Nation Sounds" /> </a>
+          <a href="https://www.snapchat.com/l/fr-fr/download" > <img class="social-img" id="logo" src="images/snapchat.png" alt="Logo Nation Sounds" /> </a>
+          <a href="https://twitter.com/home" > <img class="social-img" id="logo" src="images/twitter.png" alt="Logo Nation Sounds" /> </a>
+  </div>
+  </footer>

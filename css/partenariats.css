@@ -1,0 +1,16 @@
+.start_card{
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+  height: auto;
+  padding-bottom: 15%;
+}
+
+.titres_cat{
+  font-size: 24px;
+  color: black;
+}
+
+li{
+  color:black;
+}
