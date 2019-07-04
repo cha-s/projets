@@ -11,26 +11,118 @@ extra_css: "album.css"
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <?php
+
+<?php
             try{
               $bdd = new PDO('mysql:host=localhost;dbname=nationsounds;charset=utf8', 'root', 'root');
+              /*$photos_insert = $bdd->prepare('SELECT * FROM compte WHERE idCompte= ?');
+              $photos_insert->execute(array(4));
+              while ($row = $photos_insert->fetch()) {
+                  print_r($row['nom']);
+                };*/
+
+              $sql = "SELECT * FROM photos";
+              $result = $bdd->query($sql);
+
+
+                  // output data of each row
+                  while($row = $result->fetch()) {
+                      echo "id_compte: " . $row[id_compte]. " - Image: " . $row[img].
+                      " Nom de l'image" . $row[nom_img]."<br>";
+                  }
+                  if(isset($_POST['but_upload'])){
+
+                    $nom_img = $_FILES['file']['nom_img'];
+                    $target_dir = "upload/";
+                    $target_file = $target_dir . basename($_FILES["file"]["nom_img"]);
+
+                    // Select file type
+                    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+                    // Valid file extensions
+                    $extensions_arr = array("jpg","jpeg","png","gif");
+
+                    // Check extension
+                    if( in_array($imageFileType,$extensions_arr) ){
+
+                      // Convert to base64
+                   $image_base64 = base64_encode(file_get_contents($_FILES['file']['tmp_nom_img']) );
+                   $img = 'data:image/'.$imageFileType.';base64,'.$image_base64;
+                   // Insert record
+                   $query = "insert into images(img) values('".$img."')";
+                   mysqli_query($con,$query);
+
+                   // Upload file
+                   move_uploaded_file($_FILES['file']['tmp_name'],$target_dir.$name);
+                  }
+
+                  }
+                  ?>
+
+                  <form method="post" action="" enctype='multipart/form-data'>
+                    <input type='file' name='file' />
+                    <input type='submit' value='Save name' name='but_upload'>
+                  </form>
+
+                  <?php
+
+                  $sql = "select name from images where id=1";
+                  $result = mysqli_query($con,$sql);
+                  $row = mysqli_fetch_array($result);
+
+                  $img = $row['nom_img'];
+                  $image_src = "upload/".$img;
+
+                  ?>
+                  <img src='<?php echo $image_src;  ?>' >
+
+<?php
+
             }catch (Exception $e){
               die('Erreur : ' . $e->getMessage());
-            }
 
-            $idCompte = isset($_POST['idCompte']) ? $_POST['idCompte'] : NULL;
+
+            }
+            /*if($_POST['formSubmit']=="Submit"){
+              $idCompte = $_POST['idCompte'];
+              $img = $_POST['img'];
+              $nom_img = $_POST['nom_img'];
+            }*/
+
+          /*  $idCompte = isset($_GET['idCompte']) ? $_GET['idCompte'] : NULL;
             $img = isset($_POST['img']) ? $_POST['img'] : NULL;
             $nom_img = isset($_POST['nom_img']) ? $_POST['nom_img'] : NULL;
 
-            var_dump($img);
+
 
             $photos_insert = $bdd->prepare('INSERT INTO photos (idCompte, img, nom_img) VALUES (? , ? , ?)');
-            $photos_insert->execute(array($idCompte, $img, $nom_img));
-            var_dump($PHOTOS);
+            $photos_insert->execute(array('idCompte'=>$idCompte,'img'=>$img, 'nom_img'=>$nom_img));
+            var_dump($photos_insert);
 
             $photos = $bdd->prepare('SELECT * FROM photos WHERE idCompte= ?');
             $photos->execute(array($_GET['idCompte']));
-  ?>
+            var_dump($photos);
+
+*/
+            /*$nom = $_POST['nom'];
+            $prenom = $_POST['prenom'];
+            $date_inscription = date('Y-m-d');
+            $email = $_POST['email'];
+            $pass = $_POST['pass'];*/
+
+
+
+
+
+/*
+            echo 'test nom '.' '.$nom_img;
+
+            echo 'image    ' .var_dump($img);
+            echo 'nom de l image    ' .var_dump($nom_img);
+
+*/
+
+?>
 
     <div class="navbar navbar-dark bg-black shadow-sm">
       <div class="container d-flex justify-content">
@@ -72,7 +164,7 @@ extra_css: "album.css"
       <input type="submit" value="Valider" />
     </form>
 
-<p> Hop <?php echo $nom_img;?></p>
+<p> Hop <?php /*echo $nom_img;*/?></p>
 
 
     <!--container where image will be loaded-->
