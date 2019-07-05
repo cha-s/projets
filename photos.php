@@ -36,13 +36,13 @@ extra_css: "album.css"
                     // Check extension
                     // Check extension
                     if( in_array($imageFileType,$extensions_arr) ){
-                                
+
                         // Insert record
-                        $insert_query = "INSERT INTO photos (id_compte, img, nom_img) values ($id_compte, '$img', '$nom_img')";
+                        $insert_query = "INSERT INTO photos (id_compte, img, nom_img) values ('$id_compte', '$img', '$nom_img')";
                         $result = $bdd->query($insert_query);
 
                         // Upload file
-                        move_uploaded_file($_FILES['img']['tmp_name'],$target_dir.$name);
+                        move_uploaded_file($_FILES['img']['tmp_name'],$target_dir.$hello);
 
                      }
 
