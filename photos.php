@@ -21,7 +21,7 @@ extra_css: "album.css"
                   print_r($row['nom']);
                 };*/
 
-              $sql = "SELECT * FROM photos";
+              /*$sql = "SELECT * FROM photos";
               $result = $bdd->query($sql);
 
 
@@ -30,11 +30,16 @@ extra_css: "album.css"
                       echo "id_compte: " . $row[id_compte]. " - Image: " . $row[img].
                       " Nom de l'image" . $row[nom_img]."<br>";
                   }
-                  if(isset($_POST['but_upload'])){
+                  */
+                   $id_compte = isset($_POST['id_compte']) ? $_POST['id_compte'] : NULL;
+                   $img = isset($_POST['img']) ? $_POST['img'] : NULL;
+                   $nom_img = isset($_POST['nom_img']) ? $_POST['nom_img'] : NULL;
 
-                    $nom_img = $_FILES['file']['nom_img'];
+
+                    $hello = $_FILES['file']['name'];
+                    //stocker image
                     $target_dir = "upload/";
-                    $target_file = $target_dir . basename($_FILES["file"]["nom_img"]);
+                    $target_file = $target_dir . basename($_FILES["file"]["name"]);
 
                     // Select file type
                     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -46,47 +51,32 @@ extra_css: "album.css"
                     if( in_array($imageFileType,$extensions_arr) ){
 
                       // Convert to base64
-                   $image_base64 = base64_encode(file_get_contents($_FILES['file']['tmp_nom_img']) );
+                   $image_base64 = base64_encode(file_get_contents($_FILES['file']['tmp_name']) );
                    $img = 'data:image/'.$imageFileType.';base64,'.$image_base64;
+
                    // Insert record
-                   $query = "insert into images(img) values('".$img."')";
-                   mysqli_query($con,$query);
+                   $query = "insert into photos (id_compte, img, nom_img) values('".$id_compte. $img. $nom_img."')";
+                   $sql = "SELECT * FROM photos";
+                   $result = $bdd->query($sql);
 
                    // Upload file
-                   move_uploaded_file($_FILES['file']['tmp_name'],$target_dir.$name);
+                   move_uploaded_file($_FILES['file']['tmp_name'],$target_dir.$hello);
                   }
 
                   }
-                  ?>
+                  
 
-                  <form method="post" action="" enctype='multipart/form-data'>
-                    <input type='file' name='file' />
-                    <input type='submit' value='Save name' name='but_upload'>
-                  </form>
-
-                  <?php
-
-                  $sql = "select name from images where id=1";
-                  $result = mysqli_query($con,$sql);
-                  $row = mysqli_fetch_array($result);
-
-                  $img = $row['nom_img'];
-                  $image_src = "upload/".$img;
-
-                  ?>
-                  <img src='<?php echo $image_src;  ?>' >
-
-<?php
-
-            }catch (Exception $e){
+          catch (Exception $e){
               die('Erreur : ' . $e->getMessage());
 
 
             }
+
+
             /*if($_POST['formSubmit']=="Submit"){
               $idCompte = $_POST['idCompte'];
               $img = $_POST['img'];
-              $nom_img = $_POST['nom_img'];
+              $image = $_POST['nom_img'];
             }*/
 
           /*  $idCompte = isset($_GET['idCompte']) ? $_GET['idCompte'] : NULL;
