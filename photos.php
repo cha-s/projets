@@ -31,6 +31,8 @@ extra_css: "album.css"
                       " Nom de l'image" . $row[nom_img]."<br>";
                   }
                   */
+
+                  if (isset($POST["upload"])){
                    $id_compte = isset($_POST['id_compte']) ? $_POST['id_compte'] : NULL;
                    $img = isset($_POST['img']) ? $_POST['img'] : NULL;
                    $nom_img = isset($_POST['nom_img']) ? $_POST['nom_img'] : NULL;
@@ -55,16 +57,15 @@ extra_css: "album.css"
                    $img = 'data:image/'.$imageFileType.';base64,'.$image_base64;
 
                    // Insert record
-                   $query = "insert into photos (id_compte, img, nom_img) values('".$id_compte. $img. $nom_img."')";
-                   $sql = "SELECT * FROM photos";
-                   $result = $bdd->query($sql);
+                   $insert_query = "insert into photos (id_compte, img, nom_img) values('$id_compte', '$img', '$nom_img')";
+                   $result = $bdd->query($insert_query);
 
                    // Upload file
                    move_uploaded_file($_FILES['file']['tmp_name'],$target_dir.$hello);
                   }
 
                   }
-                  
+                }
 
           catch (Exception $e){
               die('Erreur : ' . $e->getMessage());
@@ -151,7 +152,7 @@ extra_css: "album.css"
     <form action="photos.php" method="post" enctype="multipart/form-data">
       <input type="file" name="img" accept="" capture <?php $img ?> /><br/>
       <input name="nom_img" type="text" placeholder="Nommez votre photo" <?php $nom_img ?> /><br />
-      <input type="submit" value="Valider" />
+      <input type="submit" name="upload" value="Valider" />
     </form>
 
 <p> Hop <?php /*echo $nom_img;*/?></p>
