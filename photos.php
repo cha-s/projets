@@ -32,16 +32,16 @@ extra_css: "album.css"
                   }
                   */
 
-                  if (isset($POST["upload"])){
+                  if (isset($_POST["upload"])){
                    $id_compte = isset($_POST['id_compte']) ? $_POST['id_compte'] : NULL;
                    $img = isset($_POST['img']) ? $_POST['img'] : NULL;
                    $nom_img = isset($_POST['nom_img']) ? $_POST['nom_img'] : NULL;
 
 
-                    $hello = $_FILES['file']['name'];
+                    $hello = $_FILES['img']['name'];
                     //stocker image
                     $target_dir = "upload/";
-                    $target_file = $target_dir . basename($_FILES["file"]["name"]);
+                    $target_file = $target_dir . basename($_FILES["img"]["name"]);
 
                     // Select file type
                     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -53,7 +53,7 @@ extra_css: "album.css"
                     if( in_array($imageFileType,$extensions_arr) ){
 
                       // Convert to base64
-                   $image_base64 = base64_encode(file_get_contents($_FILES['file']['tmp_name']) );
+                   $image_base64 = base64_encode(file_get_contents($_FILES['img']['tmp_name']) );
                    $img = 'data:image/'.$imageFileType.';base64,'.$image_base64;
 
                    // Insert record
@@ -61,7 +61,7 @@ extra_css: "album.css"
                    $result = $bdd->query($insert_query);
 
                    // Upload file
-                   move_uploaded_file($_FILES['file']['tmp_name'],$target_dir.$hello);
+                   move_uploaded_file($_FILES['img']['tmp_name'],$target_dir.$hello);
                   }
 
                   }
