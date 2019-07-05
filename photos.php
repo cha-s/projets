@@ -38,7 +38,7 @@ extra_css: "album.css"
                     if( in_array($imageFileType,$extensions_arr) ){
 
                         // Insert record
-                        $insert_query = "INSERT INTO photos (id_compte, img, nom_img) values ('$id_compte', '$img', '$nom_img')";
+                        $insert_query = "INSERT INTO photos values ('".$id_compte."', '".$img."', '".$nom_img."')";
                         $result = $bdd->query($insert_query);
 
                         // Upload file
